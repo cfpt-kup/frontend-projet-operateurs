@@ -1,5 +1,6 @@
 // src/components/SignupForm.js
 import React, { useState } from 'react';
+import './SignupForm.css'; // Import the CSS file
 
 const SignupForm = ({ onSignup, isLoading, error }) => {
     const [formData, setFormData] = useState({
@@ -21,7 +22,7 @@ const SignupForm = ({ onSignup, isLoading, error }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="signup-form-container" onSubmit={handleSubmit}> {/* Apply the CSS class */}
             <input
                 type="text"
                 name="firstname"
@@ -70,8 +71,8 @@ const SignupForm = ({ onSignup, isLoading, error }) => {
                 placeholder="Access Code"
                 required
             />
-            <button type="submit" disabled={isLoading}>Sign Up</button>
-            {error && <p>{error}</p>}
+            <button className="btn-submit" type="submit" disabled={isLoading}>Sign Up</button> {/* Apply the CSS class */}
+            {error && <p className="error">{error}</p>} {/* Apply the CSS class */}
         </form>
     );
 };
