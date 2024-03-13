@@ -16,7 +16,7 @@ const Header = ({ isAuthenticated, onAuthChange }) => {
             });
             localStorage.removeItem('token');
             onAuthChange(false); // Update parent component's authentication state
-            navigate('/login');
+            navigate('/'); // Redirect to the homepage
         } catch (error) {
             console.error('Logout failed:', error);
         }
@@ -40,6 +40,7 @@ const Header = ({ isAuthenticated, onAuthChange }) => {
                             </>
                         ) : (
                             <li className="nav-item">
+                                {/* Use a button or handle click properly to prevent default link behavior */}
                                 <Link onClick={handleLogout} className="nav-link btn-link">Logout</Link>
                             </li>
                         )}
