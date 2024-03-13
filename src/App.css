@@ -1,9 +1,15 @@
-/* Global Styles (in your index.css or App.css) */
+/* Global Styles */
 html,
 body,
 #root {
   height: 100%;
   margin: 0;
+  background-color: #f9f9f9;
+  /* Consistent background color throughout the app */
+  color: #333;
+  /* Default text color for better readability */
+  font-family: 'Arial', sans-serif;
+  /* A common, readable font */
 }
 
 body>div {
@@ -12,4 +18,69 @@ body>div {
   height: 100%;
 }
 
-/* Adjustments to Header.css and Footer.css remain the same */
+a {
+  color: #007bff;
+  /* Default link color to match form buttons and navbar links */
+  text-decoration: none;
+  /* Generally, removing underline from links unless hovered */
+}
+
+a:hover {
+  color: #0056b3;
+  /* Darker shade on hover for links */
+}
+
+/* Title Styles */
+h2 {
+  color: #007bff;
+  /* Matching the blue theme from buttons and links */
+  text-align: center;
+  /* Centers the title for a nicer appearance */
+  margin-bottom: 20px;
+  /* Provides space between the title and the form below */
+  font-size: 1.75rem;
+  /* Adjusts the font size for visual appeal */
+}
+
+/* Utility Classes */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  /* Max width for content to not stretch too wide on larger screens */
+  margin: 0 auto;
+  /* Center the container */
+}
+
+/* Padding and Margin Utilities */
+.p-1 {
+  padding: 5px;
+}
+
+.p-2 {
+  padding: 10px;
+}
+
+.p-3 {
+  padding: 15px;
+}
+
+.m-1 {
+  margin: 5px;
+}
+
+.m-2 {
+  margin: 10px;
+}
+
+.m-3 {
+  margin: 15px;
+}
+
+/* Border Utility */
+.border {
+  border: 1px solid #ccc;
+}
+
+.border-radius {
+  border-radius: 5px;
+}

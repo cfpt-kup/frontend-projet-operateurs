@@ -44,8 +44,8 @@ const LoginPage = ({ onAuthChange }) => {
     };
 
     return (
-        <div>
-            <h2>Login</h2>
+        <div className="form-container">
+            <h2>Sign Up</h2>
             <LoginForm onLogin={handleLogin} isLoading={isLoading} />
         </div>
     );

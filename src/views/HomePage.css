@@ -2,14 +2,25 @@
 .home-page {
     padding: 20px;
     text-align: center;
+    background-color: #f9f9f9;
+    /* Consistent background color */
+    min-height: calc(100vh - 60px);
+    /* Adjust height calculation based on header/footer */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Center content vertically for a better appearance */
 }
 
 .home-page h1 {
     font-size: 2rem;
+    color: #007bff;
+    /* Header color to match brand/button color */
     margin-bottom: 20px;
 }
 
 .home-page p {
     font-size: 1.2rem;
     color: #333;
+    /* Consistent text color for readability */
 }

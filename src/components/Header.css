@@ -1,20 +1,28 @@
 /* Header.css */
 .header {
-    background-color: #333;
-    color: #fff;
+    background-color: #f9f9f9;
+    /* Lighter background to match form styles */
+    color: #333;
+    /* Darker text for contrast against light background */
+    border-bottom: 1px solid #ccc;
+    /* Add a border for consistency */
+    padding: 10px 0;
+    /* Adjust padding */
 }
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 0;
+    padding: 0 20px;
+    /* Add horizontal padding */
 }
 
 .navbar-brand {
     font-size: 1.5rem;
     text-decoration: none;
-    color: #fff;
+    color: #007bff;
+    /* Brand color for consistency with button color */
 }
 
 .navbar-nav {
@@ -28,5 +36,13 @@
 
 .nav-link {
     text-decoration: none;
-    color: #fff;
+    color: #007bff;
+    /* Link color to match button style */
+    transition: color 0.3s;
+    /* Smooth transition for hover effects */
+}
+
+.nav-link:hover {
+    color: #0056b3;
+    /* Darker color on hover */
 }

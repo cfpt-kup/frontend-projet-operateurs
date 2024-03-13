@@ -26,7 +26,7 @@ const Header = ({ isAuthenticated, onAuthChange }) => {
         <header className="header">
             <nav className="navbar">
                 <div className="container">
-                    <Link to="/" className="navbar-brand">Project Support Operators</Link>
+                    <Link to="/" className="navbar-brand">Projet Support Opérateurs</Link>
                     <ul className="navbar-nav">
                         {!isAuthenticated ? (
                             <>
