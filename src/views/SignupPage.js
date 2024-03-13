@@ -3,38 +3,47 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import SignupForm from '../components/SignupForm';
 import Swal from 'sweetalert2'; // Import SweetAlert2
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 
-const SignupPage = () => {
+const SignupPage = ({ onAuthChange }) => { // Accept onAuthChange as a prop
     const [isLoading, setIsLoading] = useState(false);
+    let navigate = useNavigate(); // For redirecting after signup
 
     const handleSignup = async (formData) => {
         setIsLoading(true);
 
         try {
-            await axios.post('http://localhost:5001/api/users/signup', formData);
+            const response = await axios.post('http://localhost:5001/api/users/signup', formData);
             setIsLoading(false);
+            const { token } = response.data;
+            // Save the JWT token for future requests
+            localStorage.setItem('token', token);
+
+            // Set the token for all future requests
+            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
             // Show success message
             Swal.fire({
                 icon: 'success',
                 title: 'Success!',
-                text: 'Signup successful! Please check your email to confirm.',
+                text: 'Signup successful! You are now logged in.',
             });
-            // Redirect or manage the state to show a logged-in view
+
+            // Update authentication state via onAuthChange
+            if (onAuthChange) {
+                onAuthChange(true);
+            }
+
+            // Redirect to the homepage
+            navigate('/');
         } catch (err) {
             setIsLoading(false);
             let errorMsg = 'Error during signup. Please try again later.';
 
-            // Adjusting to match backend's response structure (using 'msg' instead of 'error')
             if (err.response && err.response.data && err.response.data.msg) {
-                if (err.response.data.msg === 'Invalid or inactive access code.') {
-                    errorMsg = 'The provided access code is invalid or has already been used.';
-                } else if (err.response.data.msg === 'User already exists.') {
-                    errorMsg = 'This email is already registered. Please log in or use a different email.';
-                } else {
-                    errorMsg = err.response.data.msg; // Directly use the backend message if it doesn't match known errors
-                }
+                errorMsg = err.response.data.msg;
             } else if (err.message) {
-                errorMsg = err.message; // Fallback to generic error message
+                errorMsg = err.message;
             }
 
             // Show error message

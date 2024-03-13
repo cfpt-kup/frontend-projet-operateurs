@@ -3,7 +3,7 @@ import React from 'react';
 import Header from './Header'; // Import your Header component
 import Footer from './Footer'; // Import your Footer component
 
-const AppLayout = ({ children }) => {
+const AppLayout = ({ isAuthenticated, onAuthChange, children }) => {
     // Styles for the outer container
     const layoutStyle = {
         display: 'flex',
@@ -18,7 +18,7 @@ const AppLayout = ({ children }) => {
 
     return (
         <div style={layoutStyle}>
-            <Header />
+            <Header isAuthenticated={isAuthenticated} onAuthChange={onAuthChange} />
             <main style={mainStyle}>{children}</main>
             <Footer />
         </div>
