@@ -57,7 +57,7 @@ const SignupPage = ({ onAuthChange }) => { // Accept onAuthChange as a prop
 
     return (
         <div className="form-container">
-            <h2>Login</h2>
+            <h2>Sign up</h2>
             <SignupForm onSignup={handleSignup} isLoading={isLoading} />
         </div>
     );

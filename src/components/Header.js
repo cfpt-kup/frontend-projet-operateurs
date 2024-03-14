@@ -33,16 +33,20 @@ const Header = ({ isAuthenticated, onAuthChange }) => {
                                 <li className="nav-item">
                                     <Link to="/login" className="nav-link">Log In</Link>
                                 </li>
-                                {/* Conditionally render the Sign Up link */}
                                 <li className="nav-item">
                                     <Link to="/signup" className="nav-link">Sign Up</Link>
                                 </li>
                             </>
                         ) : (
-                            <li className="nav-item">
-                                {/* Use a button or handle click properly to prevent default link behavior */}
-                                <Link onClick={handleLogout} className="nav-link btn-link">Logout</Link>
-                            </li>
+                            <>
+                                <li className="nav-item">
+                                    {/* Change this to a button to properly handle the logout functionality */}
+                                    <Link onClick={handleLogout} className="nav-link btn-link">Logout</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/profile" className="nav-link">Profile</Link>
+                                </li>
+                            </>
                         )}
                     </ul>
                 </div>

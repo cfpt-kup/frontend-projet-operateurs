@@ -4,6 +4,7 @@ import AppLayout from './components/AppLayout';
 import SignupPage from './views/SignupPage';
 import LoginPage from './views/LoginPage'; // Import the LoginPage component
 import HomePage from './views/HomePage';
+import ProfilePage from './views/ProfilePage'; // Import the ProfilePage component
 import './App.css';
 
 function App() {
@@ -36,7 +37,7 @@ function App() {
           <Route path="/signup" element={<SignupPage onAuthChange={handleAuthChange} />} />
           {/* Pass the handleAuthChange function as a prop to LoginPage */}
           <Route path="/login" element={<LoginPage onAuthChange={handleAuthChange} />} />
-          {/* Add more routes as needed */}
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
       </AppLayout>
     </Router>
