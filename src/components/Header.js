@@ -28,6 +28,10 @@ const Header = ({ isAuthenticated, onAuthChange }) => {
                 <div className="container">
                     <Link to="/" className="navbar-brand">Projet Support Opérateurs</Link>
                     <ul className="navbar-nav">
+                        {/* Homepage link */}
+                        <li className="nav-item">
+                            <Link to="/" className="nav-link">Home</Link>
+                        </li>
                         {!isAuthenticated ? (
                             <>
                                 <li className="nav-item">
@@ -40,11 +44,11 @@ const Header = ({ isAuthenticated, onAuthChange }) => {
                         ) : (
                             <>
                                 <li className="nav-item">
-                                    {/* Change this to a button to properly handle the logout functionality */}
-                                    <Link onClick={handleLogout} className="nav-link btn-link">Logout</Link>
+                                    <Link to="/profile" className="nav-link">Profile</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/profile" className="nav-link">Profile</Link>
+                                    {/* Use a button for logout to properly handle the logout functionality */}
+                                    <Link onClick={handleLogout} className="nav-link btn-link">Logout</Link>
                                 </li>
                             </>
                         )}

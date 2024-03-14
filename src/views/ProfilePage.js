@@ -14,7 +14,7 @@ const ProfilePage = () => {
         const fetchUserProfile = async () => {
             const token = localStorage.getItem('token');
             if (!token) {
-                navigate('/login'); // Redirect to login page if no token is found
+                navigate('/'); // Redirect to login page if no token is found
                 return; // Early return to prevent further execution
             }
 
