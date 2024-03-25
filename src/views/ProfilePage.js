@@ -1,20 +1,21 @@
-// src/views/ProfilePage.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import useAuth from '../hooks/useAuth'; // Adjust the path to where your useAuth hook is located
 import './ProfilePage.css'; // Ensure the path is correct based on your project structure
 
 const ProfilePage = () => {
     const [user, setUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
-    const navigate = useNavigate(); // Use useNavigate for redirection
+    const navigate = useNavigate();
+    const { handleUnauthorized } = useAuth(); // Use your useAuth hook here
 
     useEffect(() => {
         const fetchUserProfile = async () => {
             const token = localStorage.getItem('token');
             if (!token) {
-                navigate('/'); // Redirect to login page if no token is found
+                navigate('/login'); // Ensure this route points to your login page
                 return; // Early return to prevent further execution
             }
 
@@ -29,13 +30,17 @@ const ProfilePage = () => {
                 setUser(response.data);
                 setIsLoading(false);
             } catch (err) {
-                setError(err.response ? err.response.data.error : err.message);
-                setIsLoading(false);
+                if (err.response && err.response.status === 401) {
+                    handleUnauthorized(); // Use the hook's method to handle unauthorized access
+                } else {
+                    setError(err.response ? err.response.data.error : err.message);
+                    setIsLoading(false);
+                }
             }
         };
 
         fetchUserProfile();
-    }, [navigate]); // Add navigate to the dependency array
+    }, [navigate, handleUnauthorized]); // Add handleUnauthorized to the dependency array
 
     if (isLoading) {
         return <div>Loading...</div>;
