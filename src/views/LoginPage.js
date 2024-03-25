@@ -1,13 +1,14 @@
-// src/views/LoginPage.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import LoginForm from '../components/LoginForm';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // Adjust the import path as necessary
 
-const LoginPage = ({ onAuthChange }) => {
+const LoginPage = () => {
     const [isLoading, setIsLoading] = useState(false);
-    let navigate = useNavigate(); // For redirecting after login
+    let navigate = useNavigate();
+    const { onAuthChange } = useAuth(); // Use the context to get the function to update auth state
 
     const handleLogin = async (formData) => {
         setIsLoading(true);
@@ -25,20 +26,16 @@ const LoginPage = ({ onAuthChange }) => {
                 text: 'You have successfully logged in.',
             });
 
-            // Signal the App component that the user has successfully logged in
-            if (onAuthChange) {
-                onAuthChange(true);
-            }
+            // Update the global auth state to reflect that the user is now logged in
+            onAuthChange(true);
 
-            // Optionally, redirect the user to a different page
-            navigate('/'); // Redirects to the homepage, adjust as necessary
+            navigate('/'); // Redirect to homepage or desired route after login
         } catch (err) {
             setIsLoading(false);
-            let errorMsg = 'Invalid email or password.';
             Swal.fire({
                 icon: 'error',
                 title: 'Login Failed',
-                text: errorMsg,
+                text: 'Invalid email or password.',
             });
         }
     };

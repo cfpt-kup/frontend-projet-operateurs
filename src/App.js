@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import AppLayout from './components/AppLayout';
 import SignupPage from './views/SignupPage';
 import LoginPage from './views/LoginPage'; // Import the LoginPage component
@@ -31,15 +32,17 @@ function App() {
 
   return (
     <Router>
-      <AppLayout isAuthenticated={isAuthenticated} onAuthChange={handleAuthChange}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/signup" element={<SignupPage onAuthChange={handleAuthChange} />} />
-          {/* Pass the handleAuthChange function as a prop to LoginPage */}
-          <Route path="/login" element={<LoginPage onAuthChange={handleAuthChange} />} />
-          <Route path="/profile" element={<ProfilePage />} />
-        </Routes>
-      </AppLayout>
+      <AuthProvider>
+        <AppLayout isAuthenticated={isAuthenticated} onAuthChange={handleAuthChange}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/signup" element={<SignupPage onAuthChange={handleAuthChange} />} />
+            {/* Pass the handleAuthChange function as a prop to LoginPage */}
+            <Route path="/login" element={<LoginPage onAuthChange={handleAuthChange} />} />
+            <Route path="/profile" element={<ProfilePage />} />
+          </Routes>
+        </AppLayout>
+      </AuthProvider>
     </Router>
   );
 }

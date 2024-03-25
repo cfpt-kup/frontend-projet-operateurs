@@ -1,13 +1,14 @@
-// src/views/SignupPage.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import SignupForm from '../components/SignupForm';
-import Swal from 'sweetalert2'; // Import SweetAlert2
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // Adjust the import path as necessary
 
-const SignupPage = ({ onAuthChange }) => { // Accept onAuthChange as a prop
+const SignupPage = () => {
     const [isLoading, setIsLoading] = useState(false);
-    let navigate = useNavigate(); // For redirecting after signup
+    let navigate = useNavigate();
+    const { onAuthChange } = useAuth(); // Use the context to get the function to update auth state
 
     const handleSignup = async (formData) => {
         setIsLoading(true);
@@ -29,10 +30,8 @@ const SignupPage = ({ onAuthChange }) => { // Accept onAuthChange as a prop
                 text: 'Signup successful! You are now logged in.',
             });
 
-            // Update authentication state via onAuthChange
-            if (onAuthChange) {
-                onAuthChange(true);
-            }
+            // Update authentication state via context
+            onAuthChange(true);
 
             // Redirect to the homepage
             navigate('/');

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext'; // Adjust the path as necessary
 import axios from 'axios';
-import Swal from 'sweetalert2'; // Make sure SweetAlert2 is imported
+import Swal from 'sweetalert2';
 import './Header.css';
 
-const Header = ({ isAuthenticated, onAuthChange }) => {
+const Header = () => {
     let navigate = useNavigate();
+    const { isAuthenticated, onAuthChange } = useAuth();
 
     const handleLogout = async () => {
         // SweetAlert confirmation dialog
@@ -29,21 +31,19 @@ const Header = ({ isAuthenticated, onAuthChange }) => {
                     }
                 });
                 localStorage.removeItem('token');
-                onAuthChange(false); // Update parent component's authentication state
+                onAuthChange(false); // Directly use onAuthChange from useAuth context
 
                 // SweetAlert notification for successful logout
-                Swal.fire({
+                await Swal.fire({
                     icon: 'success',
                     title: 'Logged Out',
                     text: 'You have successfully logged out.',
-                }).then(() => {
-                    navigate('/'); // Redirect to the homepage after closing the SweetAlert
                 });
+
+                navigate('/'); // Redirect to the homepage after closing the SweetAlert
             } catch (error) {
                 console.error('Logout failed:', error);
-
-                // Optionally, you can also display an error message using SweetAlert if the logout fails
-                Swal.fire({
+                await Swal.fire({
                     icon: 'error',
                     title: 'Logout Failed',
                     text: 'An error occurred while trying to log out. Please try again.',
@@ -58,7 +58,6 @@ const Header = ({ isAuthenticated, onAuthChange }) => {
                 <div className="container">
                     <Link to="/" className="navbar-brand">Projet Support Opérateurs</Link>
                     <ul className="navbar-nav">
-                        {/* Homepage link */}
                         <li className="nav-item">
                             <Link to="/" className="nav-link">Home</Link>
                         </li>
@@ -77,8 +76,7 @@ const Header = ({ isAuthenticated, onAuthChange }) => {
                                     <Link to="/profile" className="nav-link">Profile</Link>
                                 </li>
                                 <li className="nav-item">
-                                    {/* Use a button for logout to properly handle the logout functionality */}
-                                    <Link onClick={handleLogout} className="nav-link btn-link">Logout</Link>
+                                    <Link onClick={handleLogout} className="nav-link btn-link" style={{ border: 'none', background: 'none' }}>Logout</Link>
                                 </li>
                             </>
                         )}

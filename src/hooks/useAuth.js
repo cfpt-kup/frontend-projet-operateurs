@@ -7,7 +7,6 @@ const useAuth = () => {
     const handleUnauthorized = useCallback(() => {
         // Delete the JWT token from local storage
         localStorage.removeItem('token'); // Adjust 'token' to your actual token key
-
         // Redirect the user to the login page
         navigate('/login'); // Use navigate with the path as the argument
     }, [navigate]); // Depend on navigate
